@@ -386,4 +386,10 @@ jobs:
               private var activeStickDirX = 0
               private var activeStickDirY = 0
 
-        
+      - name: Publish APK to Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: PadSplit test build
+          prerelease: true
+          files: app/build/outputs/debug/app-debug.apk        
