@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  actions: read
 
 jobs:
   build-apk:
@@ -63,23 +62,6 @@ jobs:
           <p align="center">
             <b>Ultra-minimal, landscape-only split Android keyboard designed for physical game controllers.</b>
           </p>
-
-          ---
-
-          ## 📥 Download the App (APK)
-          1. Go to the **[Releases](../../releases/latest)** section on this page.
-          2. Tap **`Padsplit-IME.apk`** under **Assets** to download and install it on your Android phone.
-          3. On your phone, go to **Settings → System → Keyboard → On-screen keyboard** and turn on **Padsplit IME**.
-
-          ---
-
-          ## 🎮 Gamepad Controls
-          * **D-Pad / Left Stick:** Move highlight across Left and Right key clusters
-          * **L1 / R1:** Instant jump between Left and Right sides
-          * **Button A:** Type highlighted key
-          * **Button B:** Backspace
-          * **Button X:** Spacebar
-          * **Button Y:** Enter / Send
           EOF
 
           cat << 'EOF' > settings.gradle
@@ -106,11 +88,9 @@ jobs:
               id 'com.android.application' version '8.5.0'
               id 'org.jetbrains.kotlin.android' version '1.9.24'
           }
-
           android {
               namespace 'com.padsplit.ime'
               compileSdk 34
-
               defaultConfig {
                   applicationId "com.padsplit.ime"
                   minSdk 24
@@ -118,12 +98,10 @@ jobs:
                   versionCode 1
                   versionName "1.0"
               }
-
               compileOptions {
                   sourceCompatibility JavaVersion.VERSION_17
                   targetCompatibility JavaVersion.VERSION_17
               }
-
               kotlinOptions {
                   jvmTarget = '17'
               }
@@ -162,10 +140,7 @@ jobs:
           cat << 'EOF' > app/src/main/res/drawable/ic_launcher.xml
           <?xml version="1.0" encoding="utf-8"?>
           <vector xmlns:android="http://schemas.android.com/apk/res/android"
-              android:width="108dp"
-              android:height="108dp"
-              android:viewportWidth="108"
-              android:viewportHeight="108">
+              android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
               <path android:fillColor="#06080E" android:pathData="M0,0h108v108h-108z" />
               <path android:fillColor="#1F222B" android:pathData="M18,34h12v12h-12z M33,34h12v12h-12z M36,49h12v12h-12z M18,64h27v12h-27z" />
               <path android:fillColor="#1F222B" android:strokeColor="#C8CCD4" android:strokeWidth="1.2" android:pathData="M21,49h12v12h-12z" />
@@ -191,31 +166,15 @@ jobs:
           <?xml version="1.0" encoding="utf-8"?>
           <selector xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:state_selected="true" android:state_pressed="true">
-                  <shape android:shape="rectangle">
-                      <solid android:color="#802C303D" />
-                      <corners android:radius="7dp" />
-                      <stroke android:width="1dp" android:color="#E2E5EC" />
-                  </shape>
+                  <shape android:shape="rectangle"><solid android:color="#802C303D" /><corners android:radius="7dp" /><stroke android:width="1dp" android:color="#E2E5EC" /></shape>
               </item>
               <item android:state_selected="true">
-                  <shape android:shape="rectangle">
-                      <solid android:color="#591F222B" />
-                      <corners android:radius="7dp" />
-                      <stroke android:width="1dp" android:color="#C8CCD4" />
-                  </shape>
+                  <shape android:shape="rectangle"><solid android:color="#591F222B" /><corners android:radius="7dp" /><stroke android:width="1dp" android:color="#C8CCD4" /></shape>
               </item>
               <item android:state_pressed="true">
-                  <shape android:shape="rectangle">
-                      <solid android:color="#732C303D" />
-                      <corners android:radius="7dp" />
-                  </shape>
+                  <shape android:shape="rectangle"><solid android:color="#732C303D" /><corners android:radius="7dp" /></shape>
               </item>
-              <item>
-                  <shape android:shape="rectangle">
-                      <solid android:color="#591F222B" />
-                      <corners android:radius="7dp" />
-                  </shape>
-              </item>
+              <item><shape android:shape="rectangle"><solid android:color="#591F222B" /><corners android:radius="7dp" /></shape></item>
           </selector>
           EOF
 
@@ -252,26 +211,11 @@ jobs:
           <?xml version="1.0" encoding="utf-8"?>
           <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/keyboard_root"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="#06080E"
-              android:baselineAligned="false"
-              android:orientation="horizontal"
-              android:paddingStart="6dp"
-              android:paddingTop="6dp"
-              android:paddingEnd="6dp"
-              android:paddingBottom="8dp"
-              android:splitMotionEvents="true"
-              android:weightSum="1.0">
-
-              <LinearLayout
-                  android:id="@+id/left_cluster"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="0.35"
-                  android:orientation="vertical"
-                  android:splitMotionEvents="true">
-
+              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:background="#06080E" android:baselineAligned="false"
+              android:orientation="horizontal" android:paddingStart="6dp" android:paddingTop="6dp"
+              android:paddingEnd="6dp" android:paddingBottom="8dp" android:splitMotionEvents="true" android:weightSum="1.0">
+              <LinearLayout android:id="@+id/left_cluster" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.35" android:orientation="vertical" android:splitMotionEvents="true">
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:splitMotionEvents="true">
                       <TextView android:id="@+id/key_q" style="@style/PadsplitKey" android:text="Q" />
                       <TextView android:id="@+id/key_w" style="@style/PadsplitKey" android:text="W" />
@@ -279,7 +223,6 @@ jobs:
                       <TextView android:id="@+id/key_r" style="@style/PadsplitKey" android:text="R" />
                       <TextView android:id="@+id/key_t" style="@style/PadsplitKey" android:text="T" />
                   </LinearLayout>
-
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingStart="8dp" android:splitMotionEvents="true">
                       <TextView android:id="@+id/key_a" style="@style/PadsplitKey" android:text="A" />
                       <TextView android:id="@+id/key_s" style="@style/PadsplitKey" android:text="S" />
@@ -287,7 +230,6 @@ jobs:
                       <TextView android:id="@+id/key_f" style="@style/PadsplitKey" android:text="F" />
                       <TextView android:id="@+id/key_g" style="@style/PadsplitKey" android:text="G" />
                   </LinearLayout>
-
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:splitMotionEvents="true">
                       <TextView android:id="@+id/key_shift" style="@style/PadsplitKey.Modifier" android:text="⇧" android:textSize="16sp" />
                       <TextView android:id="@+id/key_z" style="@style/PadsplitKey" android:text="Z" />
@@ -295,28 +237,14 @@ jobs:
                       <TextView android:id="@+id/key_c" style="@style/PadsplitKey" android:text="C" />
                       <TextView android:id="@+id/key_v" style="@style/PadsplitKey" android:text="V" />
                   </LinearLayout>
-
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:splitMotionEvents="true" android:weightSum="5">
                       <TextView android:id="@+id/key_sym" style="@style/PadsplitKey.Modifier" android:layout_weight="1" android:text="\?123" />
                       <TextView android:id="@+id/key_comma" style="@style/PadsplitKey" android:layout_weight="1" android:text="," />
                       <TextView android:id="@+id/key_space_left" style="@style/PadsplitKey.Modifier" android:layout_weight="3" android:text="" />
                   </LinearLayout>
               </LinearLayout>
-
-              <Space
-                  android:id="@+id/center_spacer"
-                  android:layout_width="0dp"
-                  android:layout_height="match_parent"
-                  android:layout_weight="0.30" />
-
-              <LinearLayout
-                  android:id="@+id/right_cluster"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="0.35"
-                  android:orientation="vertical"
-                  android:splitMotionEvents="true">
-
+              <Space android:id="@+id/center_spacer" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.30" />
+              <LinearLayout android:id="@+id/right_cluster" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="0.35" android:orientation="vertical" android:splitMotionEvents="true">
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:splitMotionEvents="true">
                       <TextView android:id="@+id/key_y" style="@style/PadsplitKey" android:text="Y" />
                       <TextView android:id="@+id/key_u" style="@style/PadsplitKey" android:text="U" />
@@ -324,21 +252,18 @@ jobs:
                       <TextView android:id="@+id/key_o" style="@style/PadsplitKey" android:text="O" />
                       <TextView android:id="@+id/key_p" style="@style/PadsplitKey" android:text="P" />
                   </LinearLayout>
-
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingStart="12dp" android:paddingEnd="12dp" android:splitMotionEvents="true">
                       <TextView android:id="@+id/key_h" style="@style/PadsplitKey" android:text="H" />
                       <TextView android:id="@+id/key_j" style="@style/PadsplitKey" android:text="J" />
                       <TextView android:id="@+id/key_k" style="@style/PadsplitKey" android:text="K" />
                       <TextView android:id="@+id/key_l" style="@style/PadsplitKey" android:text="L" />
                   </LinearLayout>
-
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:splitMotionEvents="true" android:weightSum="5">
                       <TextView android:id="@+id/key_b" style="@style/PadsplitKey" android:layout_weight="1" android:text="B" />
                       <TextView android:id="@+id/key_n" style="@style/PadsplitKey" android:layout_weight="1" android:text="N" />
                       <TextView android:id="@+id/key_m" style="@style/PadsplitKey" android:layout_weight="1" android:text="M" />
                       <TextView android:id="@+id/key_delete" style="@style/PadsplitKey.Modifier" android:layout_weight="2" android:text="⌫" android:textSize="16sp" />
                   </LinearLayout>
-
                   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:splitMotionEvents="true" android:weightSum="5">
                       <TextView android:id="@+id/key_space" style="@style/PadsplitKey.Modifier" android:layout_weight="3" android:text="Space" />
                       <TextView android:id="@+id/key_period" style="@style/PadsplitKey" android:layout_weight="1" android:text="." />
@@ -350,7 +275,6 @@ jobs:
 
           cat << 'EOF' > app/src/main/java/com/padsplit/ime/PadsplitInputMethodService.kt
           package com.padsplit.ime
-
           import android.annotation.SuppressLint
           import android.inputmethodservice.InputMethodService
           import android.os.Handler
@@ -363,10 +287,8 @@ jobs:
           import android.view.inputmethod.EditorInfo
           import android.widget.TextView
           import kotlin.math.abs
-
           class PadsplitInputMethodService : InputMethodService() {
               private var rootView: View? = null
-
               private companion object {
                   const val CLUSTER_LEFT = 0
                   const val CLUSTER_RIGHT = 1
@@ -374,22 +296,34 @@ jobs:
                   const val STICK_REPEAT_INITIAL_DELAY_MS = 280L
                   const val STICK_REPEAT_INTERVAL_MS = 110L
               }
-
               private var keyMatrix: Array<Array<Array<TextView>>> = emptyArray()
               private var focusCluster = CLUSTER_LEFT
               private var focusRow = 1
               private var focusCol = 0
               private var isShifted = true
               private var isSymbolLayer = false
-
               private val mainHandler = Handler(Looper.getMainLooper())
               private var activeStickDirX = 0
               private var activeStickDirY = 0
-
-      - name: Publish APK to Releases
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: nightly
-          name: PadSplit test build
-          prerelease: true
-          files: app/build/outputs/debug/app-debug.apk        
+              private val stickRepeatRunnable = object : Runnable {
+                  override fun run() {
+                      if (activeStickDirX != 0 || activeStickDirY != 0) {
+                          moveFocus(activeStickDirX, activeStickDirY)
+                          mainHandler.postDelayed(this, STICK_REPEAT_INTERVAL_MS)
+                      }
+                  }
+              }
+              private data class KeyGlyphs(val viewId: Int, val alpha: String, val symbol: String)
+              private val glyphMap = listOf(
+                  KeyGlyphs(R.id.key_q, "q", "1"), KeyGlyphs(R.id.key_w, "w", "2"),
+                  KeyGlyphs(R.id.key_e, "e", "3"), KeyGlyphs(R.id.key_r, "r", "4"),
+                  KeyGlyphs(R.id.key_t, "t", "5"), KeyGlyphs(R.id.key_a, "a", "@"),
+                  KeyGlyphs(R.id.key_s, "s", "#"), KeyGlyphs(R.id.key_d, "d", "$"),
+                  KeyGlyphs(R.id.key_f, "f", "_"), KeyGlyphs(R.id.key_g, "g", "&"),
+                  KeyGlyphs(R.id.key_z, "z", "-"), KeyGlyphs(R.id.key_x, "x", "+"),
+                  KeyGlyphs(R.id.key_c, "c", "("), KeyGlyphs(R.id.key_v, "v", ")"),
+                  KeyGlyphs(R.id.key_y, "y", "6"), KeyGlyphs(R.id.key_u, "u", "7"),
+                  KeyGlyphs(R.id.key_i, "i", "8"), KeyGlyphs(R.id.key_o, "o", "9"),
+                  KeyGlyphs(R.id.key_p, "p", "0"), KeyGlyphs(R.id.key_h, "h", "/"),
+                  KeyGlyphs(R.id.key_j, "j", "*"), KeyGlyphs(R.id.key_k, "k", "\""),
+                  KeyGlyphs(R.id.key_l, "l", "'"), KeyGly 
